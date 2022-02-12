@@ -1,3 +1,4 @@
+const createError = require('http-errors')
 
 const Koder = require('../models/koder.model')
 
@@ -10,16 +11,29 @@ function getById (id) {
 }
 
 function create (koderData) {
-  return Koder.create(koderData)
+  const newKoder = new Koder(koderData)
+
+  const errors = newKoder.validateSync()
+
+  // if (errors) {
+  //   throw new createError(400, 'Validation Failed')
+  // }
+
+  return newKoder.save()
 }
 
 function deleteById (id) {
   return Koder.findByIdAndDelete(id)
 }
 
+function updateById (id, newkoderData) {
+  return Koder.findByIdAndUpdate(id, newkoderData)
+}
+
 module.exports = {
   getAll,
   getById,
   create,
-  deleteById
+  deleteById,
+  updateById
 }

@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 
 const server = require('./src/server')
 
-const { 
+const {
   DB_USER,
   DB_PASSWORD,
   DB_HOST,
